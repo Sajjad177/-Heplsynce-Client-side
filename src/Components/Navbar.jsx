@@ -3,7 +3,7 @@ import ThemeControl from "./ThemeControl";
 import useAuth from "../Hook/useAuth";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
 
   return (
     <div className="container m-auto ">
@@ -15,18 +15,23 @@ const Navbar = () => {
           </div>
         </div>
         <div className="flex-none">
-          <ul className="menu menu-horizontal lg:text-lg px-1">
+          <ul className="menu menu-horizontal lg:text-lg px-1 lg:flex hidden">
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
+            <li>
+              <NavLink to="/need-volunteer">Need Volunteer</NavLink>
+            </li>
 
             {!user && (
-              <li>
+              <button className="btn btn-secondary">
                 <NavLink to="/login">Login</NavLink>
-              </li>
+              </button>
             )}
           </ul>
-          <ThemeControl></ThemeControl>
+          <div className="mr-5">
+            <ThemeControl></ThemeControl>
+          </div>
           {user && (
             <div className="dropdown dropdown-end z-50">
               <div
@@ -57,13 +62,46 @@ const Navbar = () => {
                   <div>My Volunteer Requested</div>
                 </li>
                 <li className="mt-2">
-                  <button className="bg-gray-200 block text-center">
+                  <button onClick={logOut} className="bg-gray-200 block text-center">
                     Logout
                   </button>
                 </li>
               </ul>
             </div>
           )}
+          <div className="dropdown">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle lg:hidden"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h7"
+                />
+              </svg>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-24"
+            >
+              <li>
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/need-volunteer">Need Volunteer </NavLink>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
