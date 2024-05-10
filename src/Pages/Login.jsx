@@ -1,8 +1,53 @@
 
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../Hook/useAuth";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
 
 const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const {signIn, user, signInWithGoogle} = useAuth()
+
+    useEffect(() => {
+        if (user) {
+          navigate("/");
+        }
+      }, [navigate, user]);
+    
+      const from = location.state || "/";
+
+    const handelGoogle = async() => {
+        try {
+            const result = await signInWithGoogle();
+            console.log(result.user);
+            toast.success("Sign In successfully");
+            navigate(from, { replace: true });
+          } catch (error) {
+            console.log(error);
+            toast.error(error?.massage);
+          }
+        };
+
+    const handelLogin = async(e) => {
+        e.preventDefault()
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+
+        try {
+            const result = await signIn(email, password);
+            console.log(result);
+            toast.success("Sign In successfully");
+            navigate(from, { replace: true });
+          } catch (error) {
+            console.log(error);
+            toast.error(error?.massage);
+          }
+        };
+
     return (
       <div className='flex justify-center items-center min-h-[calc(100vh-250px)]'>
         <div className='flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl '>
@@ -17,7 +62,7 @@ const Login = () => {
               Welcome back!
             </p>
             <p className="text-center lg:text-3xl text-2xl text-[#FF0080] font-bold">HelpSync</p>
-            <form>
+            <form onSubmit={handelLogin}>
               <div className='mt-4'>
                 <label
                   className='block mb-2 text-sm font-medium text-gray-600 '
@@ -31,6 +76,7 @@ const Login = () => {
                   name='email'
                   className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
                   type='email'
+                required
                 />
               </div>
   
@@ -50,7 +96,7 @@ const Login = () => {
                   name='password'
                   className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
                   type='password'
-                />
+                required/>
               </div>
               <div className='mt-6'>
                 <button
@@ -72,7 +118,7 @@ const Login = () => {
               <span className='w-1/5 border-b dark:border-gray-400 lg:w-1/4'></span>
             </div>
 
-            <div className='flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 '>
+            <div onClick={handelGoogle} className='flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 '>
               <div className='px-4 py-2'>
                 <FcGoogle className="text-3xl"></FcGoogle>
               </div>
