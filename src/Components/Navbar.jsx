@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import ThemeControl from "./ThemeControl";
 import useAuth from "../Hook/useAuth";
 
@@ -52,11 +52,11 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
-                <li>
+                <Link to='/add-volunteer'>
                   <div>Add Volunteer</div>
-                </li>
+                </Link>
                 <li>
-                  <div>Manage My Post</div>
+                  <Link to='/my-post'>Manage My Post</Link>
                 </li>
                 <li>
                   <div>My Volunteer Requested</div>
@@ -100,6 +100,11 @@ const Navbar = () => {
               <li>
                 <NavLink to="/need-volunteer">Need Volunteer </NavLink>
               </li>
+              {!user && (
+              <button className="btn btn-secondary">
+                <NavLink to="/login">Login</NavLink>
+              </button>
+            )}
             </ul>
           </div>
         </div>
