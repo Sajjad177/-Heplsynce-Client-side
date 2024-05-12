@@ -28,10 +28,9 @@ const MyRequest = () => {
   return (
     <div>
       <section className="container px-4 mx-auto pt-12">
-        <div className="flex items-center gap-x-3">
-          <h2 className="text-lg font-medium text-gray-800 ">My Request</h2>
-
-          <span className="px-3 py-1 text-xs bg-[#0A6847] rounded-full text-white">
+        <div className="flex items-center justify-center gap-x-3 mb-10">
+          <h2 className="text-lg lg:text-3xl font-medium text-gray-800 ">My Request</h2>
+          <span className="px-3 py-2 text-xs bg-[#0A6847] rounded-full text-white">
             {reqVolunteers.length}
           </span>
         </div>

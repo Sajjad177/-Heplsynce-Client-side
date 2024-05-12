@@ -1,4 +1,5 @@
 import Banner from "../Components/Banner";
+import Donation from "../Components/Donation";
 import VolunteerNeedNow from "../Components/VolunteerNeedNow";
 
 
@@ -8,6 +9,7 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <VolunteerNeedNow></VolunteerNeedNow>
+            <Donation></Donation>
         </div>
     );
 };

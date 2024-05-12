@@ -59,7 +59,7 @@ const Navbar = () => {
                   <Link to='/my-post'>Manage My Post</Link>
                 </li>
                 <li>
-                  <div>My Volunteer Requested</div>
+                  <Link to='/my-volunteerRequest'>My Volunteer Requested</Link>
                 </li>
                 <li className="mt-2">
                   <button onClick={logOut} className="bg-gray-200 block text-center">

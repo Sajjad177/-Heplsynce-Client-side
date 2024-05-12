@@ -63,9 +63,9 @@ const MyPost = () => {
   return (
     <div className="">
       <div className="container mx-auto pt-12">
-        <div className="flex items-center gap-x-3">
-          <h2 className="text-lg font-medium text-gray-800">My Add</h2>
-          <span className="px-3 py-1 text-xs bg-[#FF9F9F] rounded-full font-bold">
+        <div className="flex items-center justify-center gap-x-3 mb-10">
+          <h2 className="text-lg lg:text-3xl font-medium text-gray-800">My Add</h2>
+          <span className="px-3 py-2 text-xs bg-[#FF9F9F] rounded-full font-bold">
             {volunteers.length}
           </span>
         </div>
@@ -77,19 +77,19 @@ const MyPost = () => {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
+                    <th className="px-4 py-3.5 text-sm font-semibold text-left text-gray-500">
                       Title
                     </th>
-                    <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
+                    <th className="px-4 py-3.5 text-sm font-semibold text-left text-gray-500">
                       Deadline
                     </th>
-                    <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
+                    <th className="px-4 py-3.5 text-sm font-semibold text-left text-gray-500">
                       Volunteer Need
                     </th>
-                    <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
+                    <th className="px-4 py-3.5 text-sm font-semibold text-left text-gray-500">
                       Category
                     </th>
-                    <th className="px-4 py-3.5 text-sm font-normal text-left text-gray-500">
+                    <th className="px-4 py-3.5 text-sm font-semibold text-left text-gray-500">
                       Actions
                     </th>
                   </tr>
