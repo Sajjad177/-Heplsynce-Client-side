@@ -8,7 +8,7 @@ import axios from "axios";
 
 const BeAVolunteerPage = () => {
   const volunteer = useLoaderData();
-  console.log(volunteer);
+  // console.log(volunteer);
   const {
     _id,
     title,
@@ -18,49 +18,48 @@ const BeAVolunteerPage = () => {
     location,
     number_Need,
     deadline,
-    contact
+    contact,
   } = volunteer || {};
   const [startDate, setStartDate] = useState(new Date(deadline));
   const { user } = useAuth();
 
-  const handelRequest = async(e) => {
-    e.preventDefault()
-    const form = e.target
-    const DataId = _id
-    const email = user?.email
-    const deadline = startDate
-    const suggestion = form.suggestion.value
+  const handelRequest = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const DataId = _id;
+    const email = user?.email;
+    const deadline = startDate;
+    const suggestion = form.suggestion.value;
     const status = form.status.value;
 
     const requestData = {
-        DataId,
-        email,
-        deadline,
-        title,
-        thumbnail,
-        description,
-        number_Need,
-        category,
-        suggestion,
-        status,
-        contact,
-        organizer_email:contact?.email,
-        organizer_name:contact?.name,
+      DataId,
+      email,
+      deadline,
+      title,
+      thumbnail,
+      description,
+      number_Need,
+      category,
+      suggestion,
+      status,
+      organizer_email: contact?.email,
+      organizer_name: contact?.name,
+    };
+
+    console.log(requestData);
+
+    try {
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/request`, requestData);
+      console.log(data);
+      toast.success("Request submitted successfully");
+    } catch (error) {
+      console.error("Error submitting request:", error);
+      toast.error("Failed to submit request. Please try again.");
     }
 
-    console.log(requestData)
 
-    try{
-        const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/request`,requestData)
-        console.log(data)
-        toast.success('Bid placed successfully')
-        // navigate('/my-bids')
-    }catch(error){
-        console.log(error)
-        toast.error('Invalid please check again')
-    }
-
-  }
+  };
 
   return (
     <div>
@@ -82,7 +81,6 @@ const BeAVolunteerPage = () => {
                   id="name"
                   name="name"
                   defaultValue={contact?.name}
-                  
                   className="w-full p-2 border rounded-md focus:outline-blue-400"
                   readOnly
                 />
@@ -124,7 +122,6 @@ const BeAVolunteerPage = () => {
                   <option value="Education">Education</option>
                   <option value="social_service">social service</option>
                   <option value="Animal_welfare">Animal welfare</option>
-                  
                 </select>
                 <label className="mb-2 block font-semibold">
                   Number of need
@@ -159,7 +156,6 @@ const BeAVolunteerPage = () => {
                   id="email"
                   name="email"
                   defaultValue={contact?.email}
-                 
                   className="w-full p-2 border rounded-md focus:outline-blue-400"
                   readOnly
                 />

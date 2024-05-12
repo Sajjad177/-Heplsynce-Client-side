@@ -136,7 +136,7 @@ const MyPost = () => {
           )}
         </div>
       </div>
-      <div className="my-20 text-center">
+      <div className="my-20">
         <MyRequest></MyRequest>
       </div>
     </div>
