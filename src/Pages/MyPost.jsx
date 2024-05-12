@@ -4,13 +4,12 @@ import axios from "axios";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrEdit } from "react-icons/gr";
 import { Link } from "react-router-dom";
-import Swal from 'sweetalert2'
-
+import Swal from "sweetalert2";
+import MyRequest from "../Components/MyRequest";
 
 const MyPost = () => {
   const { user } = useAuth();
   const [volunteers, setVolunteers] = useState([]);
-
 
   useEffect(() => {
     const getData = async () => {
@@ -30,7 +29,6 @@ const MyPost = () => {
   }, [user?.email]);
 
   const handelDelete = async (id) => {
-    
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -38,7 +36,7 @@ const MyPost = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -49,24 +47,21 @@ const MyPost = () => {
           setVolunteers((prevVolunteers) =>
             prevVolunteers.filter((volunteer) => volunteer._id !== id)
           );
-         
+
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
-            icon: "success"
+            icon: "success",
           });
         } catch (error) {
           console.log(error);
-          
         }
       }
     });
   };
 
-
   return (
     <div className="">
-      
       <div className="container mx-auto pt-12">
         <div className="flex items-center gap-x-3">
           <h2 className="text-lg font-medium text-gray-800">My Add</h2>
@@ -141,7 +136,9 @@ const MyPost = () => {
           )}
         </div>
       </div>
-      
+      <div className="my-20 text-center">
+        <MyRequest></MyRequest>
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@
 const MyRequest = () => {
     return (
         <div>
-            <h1>My Request</h1>
+            <h1 className="text-3xl">My Request</h1>
         </div>
     );
 };
