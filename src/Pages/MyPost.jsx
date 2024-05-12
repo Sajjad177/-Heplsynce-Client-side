@@ -3,14 +3,14 @@ import useAuth from "../Hook/useAuth";
 import axios from "axios";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrEdit } from "react-icons/gr";
-import toast from "react-hot-toast";
-import useShowAllData from "../Hook/useShowAllData";
 import { Link } from "react-router-dom";
+import Swal from 'sweetalert2'
+
 
 const MyPost = () => {
   const { user } = useAuth();
   const [volunteers, setVolunteers] = useState([]);
-  const { refetch } = useShowAllData();
+
 
   useEffect(() => {
     const getData = async () => {
@@ -29,30 +29,44 @@ const MyPost = () => {
     getData();
   }, [user?.email]);
 
-  // console.log(volunteers);
-
   const handelDelete = async (id) => {
-    try {
-      const { data } = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/volunteer/${id}`
-      );
-      toast.success("Delete successfully");
-      console.log(data);
-      refetch();
-    } catch (error) {
-      console.log(error);
-      toast.error(error.massage);
-    }
+    
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const { data } = await axios.delete(
+            `${import.meta.env.VITE_API_URL}/volunteer/${id}`
+          );
+          console.log(data);
+          setVolunteers((prevVolunteers) =>
+            prevVolunteers.filter((volunteer) => volunteer._id !== id)
+          );
+         
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+        } catch (error) {
+          console.log(error);
+          
+        }
+      }
+    });
   };
 
-  // if (loading) {
-  //   return (
-  //     <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin dark:border-blue-600 flex items-center justify-center text-center"></div>
-  //   );
-  // }
 
   return (
-    <div>
+    <div className="">
+      
       <div className="container mx-auto pt-12">
         <div className="flex items-center gap-x-3">
           <h2 className="text-lg font-medium text-gray-800">My Add</h2>
@@ -127,6 +141,7 @@ const MyPost = () => {
           )}
         </div>
       </div>
+      
     </div>
   );
 };

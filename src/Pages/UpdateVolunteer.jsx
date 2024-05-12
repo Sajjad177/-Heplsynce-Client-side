@@ -1,56 +1,67 @@
 import { useState } from "react";
-import useAuth from "../Hook/useAuth";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
+import useAuth from "../Hook/useAuth";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const AddVolunteer = () => {
-    const [startDate, setStartDate] = useState(new Date());
-    const { user } = useAuth();
-    const navigate = useNavigate()
-
-  const handelAdd = async(e) => {
-    e.preventDefault()
-    const form = e.target
-    const title = form.title.value
-    const category = form.category.value
-    const number_Need = parseInt(form.noNeed.value)
-    const email = form.email.value
-    const thumbnail = form.thumbnail.value
-    const deadline = startDate
-    const location = form.location.value
-    const description = form.description.value
-
-    const addData = {
+const UpdateVolunteer = () => {
+    const volunteer = useLoaderData();
+    console.log(volunteer);
+    const {
+        _id,
         title,
-        category,
-        number_Need,
         thumbnail,
-        deadline,
-        location,
         description,
-        contact:{
-            email,
-            name: user?.displayName,
-            photo: user?.photoURL,
-        }
-    }
+        category,
+        location,
+        number_Need,
+        deadline,
+      } = volunteer || {};
+  const [startDate, setStartDate] = useState(new Date(deadline));
+  const { user } = useAuth();
+  const navigate = useNavigate()
+  
 
-    console.log(addData)
+  const handelUpdate = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const title = form.title.value;
+    const category = form.category.value;
+    const number_Need = parseInt(form.noNeed.value);
+    const email = form.email.value;
+    const thumbnail = form.thumbnail.value;
+    const deadline = startDate;
+    const location = form.location.value;
+    const description = form.description.value;
+
+    const updateData = {
+      title,
+      category,
+      number_Need,
+      thumbnail,
+      deadline,
+      location,
+      description,
+      contact: {
+        email,
+        name: user?.displayName,
+        photo: user?.photoURL,
+      },
+    };
 
     try{
-        const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/volunteer`, addData)
+        const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/volunteer/${_id}`, updateData)
         console.log(data)
-        toast.success('Data add successfully')
+        toast.success('Job data update successfully')
         navigate('/my-post')
-    }catch(error){
+        
+      }catch(error){
         console.log(error)
-        toast.error('Something is wrong')
-    }
-
-
+        toast.error(error.massage)
+      }
+    
   };
 
   return (
@@ -58,9 +69,9 @@ const AddVolunteer = () => {
       <div className="container m-auto py-10">
         <div className="shadow-lg p-5 border rounded-md">
           <div className="my-6 text-center pb-5">
-            <h1 className="text-3xl font-bold">Add Your Data</h1>
+            <h1 className="text-3xl font-bold">Update Your data</h1>
           </div>
-          <form onSubmit={handelAdd}>
+          <form onSubmit={handelUpdate}>
             <div className="flex gap-8">
               <div className="flex-1 space-y-3">
                 <label className="mb-2 block font-semibold"> Name</label>
@@ -79,6 +90,7 @@ const AddVolunteer = () => {
                   placeholder="enter title"
                   id="title"
                   name="title"
+                  defaultValue={title}
                   className="w-full p-2 border rounded-md focus:outline-blue-400"
                   required
                 />
@@ -87,6 +99,7 @@ const AddVolunteer = () => {
                   name="category"
                   id=""
                   className="w-full p-2 border rounded-md focus:outline-blue-400"
+                  defaultValue={category}
                   type="text"
                   placeholder="select category"
                 >
@@ -104,6 +117,7 @@ const AddVolunteer = () => {
                   placeholder="Number of need"
                   id="NoNeed"
                   name="noNeed"
+                  defaultValue={number_Need}
                   className="w-full p-2 border rounded-md focus:outline-blue-400"
                   required
                 />
@@ -126,15 +140,16 @@ const AddVolunteer = () => {
                   placeholder="Enter url"
                   id="thumbnail"
                   name="thumbnail"
+                  defaultValue={thumbnail}
                   className="w-full p-2 border rounded-md focus:outline-blue-400"
                   required
                 />
 
                 <div className="flex flex-col gap-2 ">
                   <label className="text-gray-700">Deadline</label>
-                  {/* Date Picker Input Field */}
+
                   <DatePicker
-                    className="border w-full p-2 rounded-md focus:outline-blue-400"
+                    className="border p-2 w-full rounded-md"
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
                   />
@@ -145,6 +160,7 @@ const AddVolunteer = () => {
                   placeholder="enter location"
                   id="price"
                   name="location"
+                  defaultValue={location}
                   className="w-full p-2 border rounded-md focus:outline-blue-400"
                   required
                 />
@@ -154,12 +170,13 @@ const AddVolunteer = () => {
             <textarea
               className="w-full p-2 border rounded-md focus:outline-blue-400"
               type="text"
+              defaultValue={description}
               placeholder="Enter short description"
               name="description"
               required
             ></textarea>
             <button className="btn w-full btn-success text-lg mt-5">
-              Add Item
+              Update Item
             </button>
           </form>
         </div>
@@ -168,4 +185,4 @@ const AddVolunteer = () => {
   );
 };
 
-export default AddVolunteer;
+export default UpdateVolunteer;

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 const useShowAllData = () => {
   const [items, setItems] = useState([]);
+  const [sliceData, setSliceData] = useState([])
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
 
@@ -18,6 +19,7 @@ const useShowAllData = () => {
       );
       // console.log(data)
       setItems(data);
+      setSliceData(data.slice(0,6))
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -49,6 +51,7 @@ const useShowAllData = () => {
     items,
     refetch,
     search,
+    sliceData
   };
 };
 

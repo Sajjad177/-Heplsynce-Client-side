@@ -2,6 +2,7 @@
 import { useState } from "react";
 import useShowAllData from "../Hook/useShowAllData";
 import { Link } from "react-router-dom";
+// import toast from "react-hot-toast";
 
 const NeedVolunteer = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,6 +15,7 @@ const NeedVolunteer = () => {
       await search(searchQuery);
     } else {
       refetch();
+      
     }
   };
 
