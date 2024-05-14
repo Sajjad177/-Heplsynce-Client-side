@@ -15,7 +15,7 @@ const MyRequest = () => {
             { withCredentials: true }
           );
           setReqVolunteers(data);
-        } catch (error) {
+        } catch(error)  {
           console.error("Error fetching data:", error);
         }
       }
@@ -24,7 +24,6 @@ const MyRequest = () => {
     getData();
   }, [user?.email]);
 
-  console.log("come from my request", reqVolunteers);
 
   return (
     <div>
