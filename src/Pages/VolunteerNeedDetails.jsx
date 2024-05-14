@@ -16,7 +16,7 @@ const VolunteerNeedDetails = () => {
 
   return (
     <div>
-      <section className="bg-gray-800 text-gray-100 my-10">
+      <section className="my-10 border-2 rounded-lg">
         <div className="container flex flex-col mx-auto lg:flex-row">
           <div className="w-full">
             <img src={thumbnail} alt="" className="w-full h-[50vh]" />
@@ -24,7 +24,7 @@ const VolunteerNeedDetails = () => {
           <div className="flex flex-col w-full p-6 lg:w-2/3 md:p-8 lg:p-12">
             <div className="flex items-center lg:flex-row  justify-between">
               <h2 className="text-3xl font-semibold leading-none">{title}</h2>
-              <span className="border lg:p-2  rounded-full bg-yellow-950 border-none">
+              <span className="border lg:p-2 md:p-1  rounded-full bg-[#B0EBB4] border-none">
                 {category}
               </span>
             </div>

@@ -1,21 +1,24 @@
 import { Link, NavLink } from "react-router-dom";
 import ThemeControl from "./ThemeControl";
 import useAuth from "../Hook/useAuth";
+import { AiOutlineLogout } from "react-icons/ai";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
 
   return (
     <div className="container m-auto ">
-      <div className="navbar bg-[#CAF4FF] shadow-sm container px-4 mx-auto">
+      <div className="navbar bg-[#CAF4FF]/50 shadow-sm container px-4 mx-auto rounded-md">
         <div className="flex-1">
           <div className="flex gap-2 items-center">
             <img className="w-auto h-7" src="" alt="" />
-            <span className="font-bold">HelpSync</span>
+            <span className="font-bold lg:text-3xl text-xl font-shadows">
+              HelpSync
+            </span>
           </div>
         </div>
         <div className="flex-none">
-          <ul className="menu menu-horizontal lg:text-lg px-1 lg:flex hidden">
+          <ul className="menu menu-horizontal lg:text-lg lg:px-1 lg:flex hidden">
             <li>
               <NavLink to="/">Home</NavLink>
             </li>
@@ -24,9 +27,11 @@ const Navbar = () => {
             </li>
 
             {!user && (
-              <button className="btn btn-secondary">
-                <NavLink to="/login">Login</NavLink>
-              </button>
+              <Link to="/login">
+                <button className="btn btn-outline lg:ml-2  btn-info">
+                  Login
+                </button>
+              </Link>
             )}
           </ul>
           <div className="mr-5">
@@ -52,17 +57,21 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
               >
-                <Link to='/add-volunteer'>
-                  <div>Add Volunteer</div>
+                <Link to="/add-volunteer">
+                  <li>Add Volunteer</li>
                 </Link>
                 <li>
-                  <Link to='/my-post'>Manage My Post</Link>
+                  <Link to="/my-post">Manage My Post</Link>
                 </li>
                 <li>
-                  <Link to='/my-volunteerRequest'>My Volunteer Requested</Link>
+                  <Link to="/my-volunteerRequest">My Volunteer Requested</Link>
                 </li>
                 <li className="mt-2">
-                  <button onClick={logOut} className="bg-gray-200 block text-center">
+                  <button
+                    onClick={logOut}
+                    className="bg-gray-200 text-center flex"
+                  >
+                    <AiOutlineLogout className="text-lg"></AiOutlineLogout>
                     Logout
                   </button>
                 </li>
@@ -101,10 +110,12 @@ const Navbar = () => {
                 <NavLink to="/need-volunteer">Need Volunteer </NavLink>
               </li>
               {!user && (
-              <button className="btn btn-secondary">
-                <NavLink to="/login">Login</NavLink>
-              </button>
-            )}
+                <Link to="/login">
+                  <button className="btn btn-outline lg:ml-2  btn-info">
+                    Login
+                  </button>
+                </Link>
+              )}
             </ul>
           </div>
         </div>

@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
 import useAuth from "../Hook/useAuth";
-import axios from "axios";
+import { Helmet } from "react-helmet-async";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrEdit } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import MyRequest from "../Components/MyRequest";
+import useAxiosSecure from "../Hook/useAxiosSecure";
 
 const MyPost = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const [volunteers, setVolunteers] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
-      if (user?.email) {
+      if (user?.email && axiosSecure) {
         try {
-          const { data } = await axios.get(
-            `${import.meta.env.VITE_API_URL}/volunteers/${user.email}`
-          );
+          const { data } = await axiosSecure(`/volunteers/${user.email}`);
           setVolunteers(data);
         } catch (error) {
           console.error("Error fetching data:", error);
@@ -26,7 +26,7 @@ const MyPost = () => {
     };
 
     getData();
-  }, [user?.email]);
+  }, [user?.email, axiosSecure]);
 
   const handelDelete = async (id) => {
     Swal.fire({
@@ -40,9 +40,7 @@ const MyPost = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const { data } = await axios.delete(
-            `${import.meta.env.VITE_API_URL}/volunteer/${id}`
-          );
+          const { data } = await axiosSecure.delete(`/volunteer/${id}`);
           console.log(data);
           setVolunteers((prevVolunteers) =>
             prevVolunteers.filter((volunteer) => volunteer._id !== id)
@@ -62,9 +60,14 @@ const MyPost = () => {
 
   return (
     <div className="">
-      <div className="container mx-auto pt-12">
+      <Helmet>
+        <title>HelpSync / My Post</title>
+      </Helmet>
+      <section className="container mx-auto pt-12">
         <div className="flex items-center justify-center gap-x-3 mb-10">
-          <h2 className="text-lg lg:text-3xl font-medium text-gray-800">My Add</h2>
+          <h2 className="text-lg lg:text-3xl font-medium text-gray-800">
+            My Add
+          </h2>
           <span className="px-3 py-2 text-xs bg-[#FF9F9F] rounded-full font-bold">
             {volunteers.length}
           </span>
@@ -135,8 +138,8 @@ const MyPost = () => {
             </div>
           )}
         </div>
-      </div>
-      <div className="my-20">
+      </section>
+      <div className="lg:my-20 my-10">
         <MyRequest></MyRequest>
       </div>
     </div>

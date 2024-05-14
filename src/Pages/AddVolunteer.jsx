@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AddVolunteer = () => {
     const [startDate, setStartDate] = useState(new Date());
@@ -55,10 +56,13 @@ const AddVolunteer = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>HelpSync / add Volunteer</title>
+      </Helmet>
       <div className="container m-auto py-10">
         <div className="shadow-lg p-5 border rounded-md">
           <div className="my-6 text-center pb-5">
-            <h1 className="text-3xl font-bold">Add Your Data</h1>
+            <h1 className="text-3xl font-bold">Add Your Volunteer</h1>
           </div>
           <form onSubmit={handelAdd}>
             <div className="flex gap-8">
@@ -159,7 +163,7 @@ const AddVolunteer = () => {
               required
             ></textarea>
             <button className="btn w-full btn-success text-lg mt-5">
-              Add Item
+              Add Volunteer
             </button>
           </form>
         </div>

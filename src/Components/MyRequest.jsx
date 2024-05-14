@@ -11,7 +11,8 @@ const MyRequest = () => {
       if (user?.email) {
         try {
           const { data } = await axios.get(
-            `${import.meta.env.VITE_API_URL}/request/${user.email}`
+            `${import.meta.env.VITE_API_URL}/request/${user.email}`,
+            { withCredentials: true }
           );
           setReqVolunteers(data);
         } catch (error) {
@@ -27,7 +28,7 @@ const MyRequest = () => {
 
   return (
     <div>
-      <section className="container px-4 mx-auto pt-12">
+      <section className="container px-4 mx-auto lg:pt-12">
         <div className="flex items-center justify-center gap-x-3 mb-10">
           <h2 className="text-lg lg:text-3xl font-medium text-gray-800 ">My Request</h2>
           <span className="px-3 py-2 text-xs bg-[#0A6847] rounded-full text-white">

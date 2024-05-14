@@ -10,57 +10,79 @@ import MyPost from "../Pages/MyPost";
 import UpdateVolunteer from "../Pages/UpdateVolunteer";
 import BeAVolunteerPage from "../Pages/BeAVolunteerPage";
 import MyVolunteerRequest from "../Pages/MyVolunteerRequest";
+import ErrorPage from "../Pages/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Main></Main>,
-      children:[
-        {
-          path:'/',
-          element:<Home></Home>,
-        },
-        {
-          path:'/login',
-          element:<Login></Login>
-        },
-        {
-          path:'/register',
-          element:<Register></Register>
-        },
-        {
-          path:'/need-volunteer',
-          element:<NeedVolunteer></NeedVolunteer>,
-        },
-        {
-          path:'/add-volunteer',
-          element:<AddVolunteer></AddVolunteer>,
-        },
-        {
-          path: '/details/:id',
-          element:<VolunteerNeedDetails></VolunteerNeedDetails>,
-          loader :({params}) => fetch(`${import.meta.env.VITE_API_URL}/volunteer/${params.id}`)
-        },
-        {
-          path:'/my-post', 
-          element:<MyPost></MyPost>
-        },
-        {
-          path:'/update/:id',
-          element:<UpdateVolunteer></UpdateVolunteer>,
-          loader :({params}) => fetch(`${import.meta.env.VITE_API_URL}/volunteer/${params.id}`)
-        },
-        {
-          path:'/be-volunteer/:id',
-          element:<BeAVolunteerPage></BeAVolunteerPage>,
-          loader :({params}) => fetch(`${import.meta.env.VITE_API_URL}/volunteer/${params.id}`)
-        },
-        {
-          path:'/my-volunteerRequest',
-          element:<MyVolunteerRequest></MyVolunteerRequest>
-        },
-      ]
-    },
-  ]);
+  {
+    path: "/",
+    element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/need-volunteer",
+        element: <NeedVolunteer></NeedVolunteer>,
+      },
+      {
+        path: "/add-volunteer",
+        element: (
+          <PrivateRoute>
+            <AddVolunteer></AddVolunteer>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/details/:id",
+        element: (
+          <PrivateRoute>
+            <VolunteerNeedDetails></VolunteerNeedDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/volunteer/${params.id}`),
+      },
+      {
+        path: "/my-post",
+        element: (
+          <PrivateRoute>
+            <MyPost></MyPost>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateVolunteer></UpdateVolunteer>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/volunteer/${params.id}`),
+      },
+      {
+        path: "/be-volunteer/:id",
+        element: <BeAVolunteerPage></BeAVolunteerPage>,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/volunteer/${params.id}`),
+      },
+      {
+        path: "/my-volunteerRequest",
+        element: <MyVolunteerRequest></MyVolunteerRequest>,
+      },
+    ],
+  },
+]);
 
-export default router
+export default router;

@@ -7,12 +7,12 @@ const Donation = () => {
   const { user } = useAuth();
   return (
     <div>
-      <div className="mt-10 border-b-2 border-dashed pb-8">
-        <h1 className="lg:text-4xl text-2xl font-bold
-         text-center">Gift Your Donate</h1>
-         <p className="text-center mt-2 font-roboto">Together we can make a different</p>
+      <div className="lg:mt-10 border-b-2 border-dashed pb-8">
+        <h1 className="lg:text-5xl text-2xl font-bold
+         text-center font-shadows">Gift Your Donate</h1>
+         <p className="text-center lg:mt-5 font-shadows lg:text-2xl">Together we can make a different</p>
       </div>
-      <div className="grid grid-cols-2 gap-10 my-20">
+      <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-10 lg:my-20 my-10">
         <div>
           {/* -------------form--------------- */}
           <div className="text-center py-5 bg-orange-400">

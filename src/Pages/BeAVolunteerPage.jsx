@@ -1,12 +1,13 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../Hook/useAuth";
 import toast from "react-hot-toast";
 import axios from "axios";
 
 const BeAVolunteerPage = () => {
+  const navigate = useNavigate()
   const volunteer = useLoaderData();
   // console.log(volunteer);
   const {
@@ -52,6 +53,7 @@ const BeAVolunteerPage = () => {
     try {
       const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/request`, requestData);
       console.log(data);
+      navigate('/my-post')
       toast.success("Request submitted successfully");
     } catch (error) {
       console.error("Error submitting request:", error);
@@ -66,7 +68,7 @@ const BeAVolunteerPage = () => {
       <div className="container m-auto py-10">
         <div className="shadow-lg p-5 border rounded-md">
           <div className="my-6 text-center pb-5">
-            <h1 className="text-3xl font-bold">Request</h1>
+            <h1 className="text-3xl font-bold"> Volunteer Request</h1>
           </div>
           <form onSubmit={handelRequest}>
             <div className="flex gap-8">

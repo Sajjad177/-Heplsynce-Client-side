@@ -32,12 +32,16 @@ const Banner = () => {
         style={{ backgroundImage: `url(${sliders[currentSlider].img})` }}
       >
         <div className="drop-shadow-lg text-white text-center px-5">
-          <p className="lg:text-5xl md:text-3xl text-lg">
-            {sliders[currentSlider].des}
-          </p>
+          <div className="">
+            <h1 className="lg:text-5xl mb-3 md:text-3xl text-2xl font-shadows font-semibold">
+              {sliders[currentSlider].des}
+            </h1>
+            <span>{`Give A Helping Hand For Poor People. Let's Work Together`}</span>
+          </div>
+
           <button className="text-xl mt-8 box-border border  w-48 h-14 rounded-lg  text-white relative group">
-            <span className="pr-8">DONATE</span>
-            <span className="bg-[#0A6847] absolute right-0 top-0 h-full rounded-lg flex items-center justify-center px-1 group-hover:duration-300 group-hover:w-full w-10 duration-300">
+            <span className="pr-8 font-shadows font-bold lg:text-3xl text-xl">DONATE</span>
+            <span className="bg-[#0A6847] absolute right-0 top-0 h-full rounded-lg flex items-center justify-center px-1 group-hover:duration-300 group-hover:w-full w-10 duration-300 ">
               <BiSolidDonateHeart className="w-10 inline mx-auto text-3xl"></BiSolidDonateHeart>
             </span>
           </button>

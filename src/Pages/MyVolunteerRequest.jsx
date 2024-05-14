@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { MdOutlineSearchOff } from "react-icons/md";
+import { Helmet } from "react-helmet-async";
 
 const MyVolunteerRequest = () => {
   const { user } = useAuth();
@@ -60,6 +61,9 @@ const MyVolunteerRequest = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>HelpSync / my volunteer request</title>
+      </Helmet>
       <section className="container px-4 mx-auto pt-12">
         <div className="flex items-center justify-center gap-x-3 mb-10">
           <h2 className="text-lg lg:text-3xl font-medium text-gray-800">

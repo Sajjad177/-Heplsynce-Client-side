@@ -5,7 +5,7 @@ import Footer from "../Pages/Footer";
 
 const Main = () => {
     return (
-        <div className="container m-auto p-3">
+        <div className="container m-auto p-3 font-roboto">
             <Navbar></Navbar>
             <div className="min-h-[calc(100\vh-250px)]">
                 <Outlet></Outlet>
