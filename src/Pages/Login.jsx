@@ -43,16 +43,15 @@ const Login = () => {
     try {
       const result = await signIn(email, password);
       console.log(result);
-      const { data } = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_API_URL}/jwt`,
         { email: result?.user?.email },
         { withCredentials: true }
       );
-      console.log("from jwt---2", data);
       toast.success("Sign In successfully");
       navigate(from, { replace: true });
-    } catch  {
-      toast.error("AlReady have an account");
+    } catch {
+      toast.error("Invalid Please Check again");
     }
   };
 
