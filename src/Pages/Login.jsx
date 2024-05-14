@@ -22,18 +22,15 @@ const Login = () => {
   const handelGoogle = async () => {
     try {
       const result = await signInWithGoogle();
-      console.log(result.user);
-      const { data } = await axios.post(
+        await axios.post(
         `${import.meta.env.VITE_API_URL}/jwt`,
         { email: result?.user?.email },
         { withCredentials: true }
       );
-      console.log("from jwt---1", data);
       toast.success("Sign In successfully");
       navigate(from, { replace: true });
-    } catch (error) {
-      console.log(error);
-      toast.error(error?.massage);
+    } catch  {
+      toast.error("Invalid Please Check again");
     }
   };
 
@@ -42,7 +39,6 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
 
     try {
       const result = await signIn(email, password);
