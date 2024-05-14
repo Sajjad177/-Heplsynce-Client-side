@@ -54,12 +54,11 @@ const UpdateVolunteer = () => {
     try{
         const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/volunteer/${_id}`, updateData)
         console.log(data)
-        toast.success('Job data update successfully')
+        toast.success('Volunteer update successfully')
         navigate('/my-post')
         
-      }catch(error){
-        console.log(error)
-        toast.error(error.massage)
+      }catch{
+        toast.error('Error Please Check again')
       }
     
   };
@@ -69,7 +68,7 @@ const UpdateVolunteer = () => {
       <div className="container m-auto py-10">
         <div className="shadow-lg p-5 border rounded-md">
           <div className="my-6 text-center pb-5">
-            <h1 className="text-3xl font-bold">Update Your data</h1>
+            <h1 className="text-3xl font-bold">Update Volunteer</h1>
           </div>
           <form onSubmit={handelUpdate}>
             <div className="flex gap-8">
@@ -176,7 +175,7 @@ const UpdateVolunteer = () => {
               required
             ></textarea>
             <button className="btn w-full btn-success text-lg mt-5">
-              Update Item
+              Update Volunteer
             </button>
           </form>
         </div>

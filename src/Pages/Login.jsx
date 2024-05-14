@@ -78,7 +78,7 @@ const Login = () => {
             <p className="mt-3 text-xl font-semibold text-center text-gray-600 ">
               Welcome back!
             </p>
-            <p className="text-center lg:text-3xl text-2xl text-[#FF0080] font-bold">
+            <p className="text-center lg:text-5xl text-2xl text-[#FF0080] font-bold font-shadows mb-6">
               HelpSync
             </p>
             <form onSubmit={handelLogin}>

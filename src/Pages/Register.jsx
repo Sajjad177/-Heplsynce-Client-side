@@ -58,7 +58,7 @@ const Register = () => {
       <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-20">
         <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl ">
           <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
-            <p className="mt-3 text-xl text-center text-gray-600 font-bold lg:text-3xl">
+            <p className="mt-3 text-xl text-center text-gray-600 font-bold lg:text-3xl mb-10">
               Create your account
             </p>
             <form onSubmit={handelRegister}>
