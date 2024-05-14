@@ -18,7 +18,6 @@ const Register = () => {
     const name = form.name.value;
     const photo = form.photo.value;
     const password = form.password.value;
-    console.log(email, name, photo, password);
 
     if (password.length < 6) {
       toast.error("Give minimum 6 password");
@@ -36,16 +35,15 @@ const Register = () => {
       console.log(result);
       await updateUserProfile(name, photo);
       setUser({ ...result?.user, photoURL: photo, displayName: name });
-      const { data } = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_API_URL}/jwt`,
         { email: result?.user?.email },
         { withCredentials: true }
       );
-      console.log("from jwt", data);
+      
       navigate(from, { replace: true });
       toast.success("Sign In successfully");
     } catch {
-      // console.log(error);
       toast.error("Invalid Check again");
     }
   };
