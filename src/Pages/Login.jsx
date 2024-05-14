@@ -55,9 +55,8 @@ const Login = () => {
       console.log("from jwt---2", data);
       toast.success("Sign In successfully");
       navigate(from, { replace: true });
-    } catch (error) {
-      console.log(error);
-      toast.error(error?.massage);
+    } catch  {
+      toast.error("AlReady have an account");
     }
   };
 
