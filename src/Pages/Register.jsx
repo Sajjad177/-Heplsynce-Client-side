@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../Hook/useAuth";
 import toast from "react-hot-toast";
-import axios from "axios";
+// import axios from "axios";
 import { Helmet } from "react-helmet-async";
 
 const Register = () => {
@@ -35,11 +35,11 @@ const Register = () => {
       console.log(result);
       await updateUserProfile(name, photo);
       setUser({ ...result?.user, photoURL: photo, displayName: name });
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/jwt`,
-        { email: result?.user?.email },
-        { withCredentials: true }
-      );
+      // await axios.post(
+      //   `${import.meta.env.VITE_API_URL}/jwt`,
+      //   { email: result?.user?.email },
+      //   { withCredentials: true }
+      // );
       
       navigate(from, { replace: true });
       toast.success("Sign In successfully");

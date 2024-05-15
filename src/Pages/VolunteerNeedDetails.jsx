@@ -2,7 +2,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const VolunteerNeedDetails = () => {
   const volunteer = useLoaderData();
-  console.log(volunteer);
+
   const {
     _id,
     title,

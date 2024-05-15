@@ -6,27 +6,28 @@ import { GrEdit } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import MyRequest from "../Components/MyRequest";
-import useAxiosSecure from "../Hook/useAxiosSecure";
+import useShowAllData from "../Hook/useShowAllData";
+import axios from "axios";
 
 const MyPost = () => {
   const { user } = useAuth();
-  const axiosSecure = useAxiosSecure();
+  const {loading} = useShowAllData()
   const [volunteers, setVolunteers] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
-      if (user?.email && axiosSecure) {
+      // if (user?.email) {
         try {
-          const { data } = await axiosSecure(`/volunteers/${user.email}`);
+          const {data} = await axios.get(`${import.meta.env.VITE_API_URL}/volunteers/${user.email}`)
           setVolunteers(data);
         } catch (error) {
           console.error("Error fetching data:", error);
         }
-      }
+      // }
     };
 
     getData();
-  }, [user?.email, axiosSecure]);
+  }, [user?.email]);
 
   const handelDelete = async (id) => {
     Swal.fire({
@@ -40,7 +41,7 @@ const MyPost = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const { data } = await axiosSecure.delete(`/volunteer/${id}`);
+          const {data} = await axios.delete(`${import.meta.env.VITE_API_URL}/volunteer/${id}`)
           console.log(data);
           setVolunteers((prevVolunteers) =>
             prevVolunteers.filter((volunteer) => volunteer._id !== id)
@@ -57,6 +58,15 @@ const MyPost = () => {
       }
     });
   };
+
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center">
+        <div className="w-10 h-10 animate-[spin_2s_linear_infinite] rounded-full border-8 border-dotted border-sky-600"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="">
