@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import useShowAllData from "../Hook/useShowAllData";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import VolunteerNeedNowCard from "./VolunteerNeedNowCard";
+import { Fade } from "react-awesome-reveal";
 
 const VolunteerNeedNow = () => {
   const { sliceData, loading } = useShowAllData();
@@ -18,7 +19,7 @@ const VolunteerNeedNow = () => {
     <div>
       <div className="lg:my-20 my-10 border-b-2 border-dashed pb-5">
         <h1 className="lg:text-5xl text-3xl font-bold text-center font-shadows">
-          Volunteer Need Now
+          <Fade cascade duration={300}>Volunteer Need Now</Fade>
         </h1>
       </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10">

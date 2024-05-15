@@ -1,3 +1,4 @@
+import { Fade } from "react-awesome-reveal";
 import useAuth from "../Hook/useAuth";
 import { FaPaypal } from "react-icons/fa";
 import { SiVisa } from "react-icons/si";
@@ -8,9 +9,17 @@ const Donation = () => {
   return (
     <div>
       <div className="lg:mt-10 border-b-2 border-dashed pb-8">
-        <h1 className="lg:text-5xl text-2xl font-bold
-         text-center font-shadows">Gift Your Donate</h1>
-         <p className="text-center lg:mt-5 font-shadows lg:text-2xl">Together we can make a different</p>
+        <h1
+          className="lg:text-5xl text-2xl font-bold
+         text-center font-shadows"
+        >
+          <Fade cascade duration={300}>
+            Gift Your Donation
+          </Fade>
+        </h1>
+        <p className="text-center lg:mt-5 font-shadows lg:text-2xl">
+          Together we can make a different
+        </p>
       </div>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 lg:my-20 my-10">
         <div>

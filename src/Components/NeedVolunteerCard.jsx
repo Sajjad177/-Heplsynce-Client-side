@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const VolunteerNeedNowCard = ({ item }) => {
+const NeedVolunteerCard = ({item}) => {
   return (
     <div>
       <div className=" lg:w-full bg-base-100 shadow-xl border rounded-md p-5">
@@ -46,8 +46,8 @@ const VolunteerNeedNowCard = ({ item }) => {
   );
 };
 
-VolunteerNeedNowCard.propTypes = {
-  item: PropTypes.object,
+NeedVolunteerCard.propTypes = {
+    item:PropTypes.object
 };
 
-export default VolunteerNeedNowCard;
+export default NeedVolunteerCard;

@@ -35,12 +35,6 @@ const Register = () => {
       console.log(result);
       await updateUserProfile(name, photo);
       setUser({ ...result?.user, photoURL: photo, displayName: name });
-      // await axios.post(
-      //   `${import.meta.env.VITE_API_URL}/jwt`,
-      //   { email: result?.user?.email },
-      //   { withCredentials: true }
-      // );
-      
       navigate(from, { replace: true });
       toast.success("Sign In successfully");
     } catch {

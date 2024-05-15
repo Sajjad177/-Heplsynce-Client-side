@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import ThemeControl from "./ThemeControl";
 import useAuth from "../Hook/useAuth";
 import { AiOutlineLogout } from "react-icons/ai";
+import { ImMenu } from "react-icons/im";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -9,6 +10,33 @@ const Navbar = () => {
   return (
     <div className="">
       <div className="navbar bg-[#CAF4FF]/50 shadow-sm container px-4 mx-auto rounded-md">
+        <div className="dropdown">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle lg:hidden"
+          >
+            <ImMenu className="text-3xl"></ImMenu>
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-24"
+          >
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/need-volunteer">Need Volunteer </NavLink>
+            </li>
+            {!user && (
+              <Link to="/login">
+                <button className="btn btn-outline lg:ml-2  btn-info">
+                  Login
+                </button>
+              </Link>
+            )}
+          </ul>
+        </div>
         <div className="flex-1">
           <div className="flex gap-2 items-center">
             <img className="w-auto h-7" src="" alt="" />
@@ -78,46 +106,6 @@ const Navbar = () => {
               </ul>
             </div>
           )}
-          <div className="dropdown">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle lg:hidden"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h7"
-                />
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-24"
-            >
-              <li>
-                <NavLink to="/">Home</NavLink>
-              </li>
-              <li>
-                <NavLink to="/need-volunteer">Need Volunteer </NavLink>
-              </li>
-              {!user && (
-                <Link to="/login">
-                  <button className="btn btn-outline lg:ml-2  btn-info">
-                    Login
-                  </button>
-                </Link>
-              )}
-            </ul>
-          </div>
         </div>
       </div>
     </div>

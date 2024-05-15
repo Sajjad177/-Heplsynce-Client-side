@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import { FaTableCells } from "react-icons/fa6";
 import { BsCardText } from "react-icons/bs";
 import { Helmet } from "react-helmet-async";
+import NeedVolunteerCard from "../Components/NeedVolunteerCard";
 
 const NeedVolunteer = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const { items, search, refetch } = useShowAllData();
+  const { items, search, refetch, loading } = useShowAllData();
   const [isTableLayout, setIsTableLayout] = useState(false);
 
   const handleSearch = async () => {
@@ -22,6 +23,14 @@ const NeedVolunteer = () => {
     setIsTableLayout((prevLayout) => !prevLayout);
   };
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center">
+        <div className="w-10 h-10 animate-[spin_2s_linear_infinite] rounded-full border-8 border-dotted border-sky-600"></div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Helmet>
@@ -33,7 +42,8 @@ const NeedVolunteer = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search by Post Title"
-          className="p-3  border rounded"
+          className="p-3 
+           border rounded"
         />
         <button
           onClick={handleSearch}
@@ -93,31 +103,9 @@ const NeedVolunteer = () => {
         </table>
       ) : (
         // Card layout
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 my-16">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 my-16 w-full">
           {items?.map((item) => (
-            <div
-              key={item._id}
-              className="rounded-xl shadow-md"
-            >
-              <img
-                src={item.thumbnail}
-                alt=""
-                className="object-cover object-center w-full rounded-t-md h-72 bg-gray-500"
-              />
-              <div className="p-6 space-y-4">
-                <h2 className="text-xl lg:text-3xl md:text-2xl font-semibold">{item.title}</h2>
-                <p>Location: {item.location}</p>
-                <p>Deadline: {new Date(item.deadline).toLocaleDateString()}</p>
-                <p>Volunteer Need: {item.number_Need}</p>
-                {item.number_Need > 0 ? (
-                  <Link to={`/details/${item._id}`} className="text-blue-500">
-                    <button className="btn btn-primary mt-10 w-full">View Details</button>
-                  </Link>
-                ) : (
-                  <p className="text-red-500">Volunteers not needed</p>
-                )}
-              </div>
-            </div>
+            <NeedVolunteerCard key={item._id} item={item}></NeedVolunteerCard>
           ))}
         </div>
       )}
