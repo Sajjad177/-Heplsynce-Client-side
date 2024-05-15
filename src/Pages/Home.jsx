@@ -8,8 +8,7 @@ import VolunteerNeedNow from "../Components/VolunteerNeedNow";
 
 const Home = () => {
     return (
-        <div>
-            
+        <div className="">
             <Helmet>
                 <title>Home</title>
             </Helmet>

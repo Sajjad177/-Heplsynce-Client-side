@@ -7,7 +7,7 @@ const Navbar = () => {
   const { user, logOut } = useAuth();
 
   return (
-    <div className="container m-auto ">
+    <div className="">
       <div className="navbar bg-[#CAF4FF]/50 shadow-sm container px-4 mx-auto rounded-md">
         <div className="flex-1">
           <div className="flex gap-2 items-center">

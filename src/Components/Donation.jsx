@@ -12,7 +12,7 @@ const Donation = () => {
          text-center font-shadows">Gift Your Donate</h1>
          <p className="text-center lg:mt-5 font-shadows lg:text-2xl">Together we can make a different</p>
       </div>
-      <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-10 lg:my-20 my-10">
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 lg:my-20 my-10">
         <div>
           {/* -------------form--------------- */}
           <div className="text-center py-5 bg-orange-400">
